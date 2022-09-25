@@ -12,8 +12,8 @@
         return response.data.results
     }
 
-    onMounted( () => {
-       characters.value = getCharacters()
+    onMounted( async () => {
+       characters.value =await getCharacters()
     })
  
 
@@ -22,13 +22,19 @@
 
 
 <template>
-    
-    <h1>Rick And Morty</h1>
-    <Card/>
+    <div class="container">
+
+        <h1 class="title" >Rick And Morty</h1>
+        <Card :characters="characters" />
+    </div>
 
 </template>
 
 <style lang="scss" scoped >
 
+    .title{
+        font-family: 'Nabla', cursive;
+
+    }
 
 </style>

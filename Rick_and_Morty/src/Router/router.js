@@ -10,7 +10,8 @@ const routes = [
     {
         name : "CharacterPage",
         path : "/character/:id",
-        component : () => import("../Views/CharacterPage.vue")
+        component : () => import("../Views/CharacterPage.vue"),
+        params : true
     }
 ]
 
