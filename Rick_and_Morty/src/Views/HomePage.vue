@@ -1,3 +1,4 @@
+
 <script setup>
     import axios from "axios"
     import { ref , onMounted} from 'vue'
@@ -23,7 +24,6 @@
 
 <template>
     <div class="container">
-
         <h1 class="title" >Rick And Morty</h1>
         <Card :characters="characters" />
     </div>

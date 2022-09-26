@@ -1,6 +1,6 @@
 <script setup >
 
-    import { defineProps,defineEmits } from 'vue';
+    import { defineProps} from 'vue';
 
     const props = defineProps(["character"])
 
@@ -9,8 +9,8 @@
 
 <template>
     
-    <div class="character_container"  >
-        <img class="character_container__img" :src="props.character.image" />
+    <div class="characters_container"  >
+        <img class="characters_container__img" :src="props.character.image" />
         <p>{{props.character.name}}</p>
     </div>
 
@@ -19,11 +19,11 @@
 
 <style lang="scss" scoped >
 
-    .character_container{
+    .characters_container{
         width: 400px;
         height: 300px;
         // background-color: #080308;
-        background-color: #191319;
+        background-color: #1b121b;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -33,6 +33,8 @@
         border-radius: 15px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         transition: all 0.3s ease-in-out;
+        font-family: 'Caveat Brush', cursive;
+        font-size: 24px;
         cursor: pointer;
         &:hover{
             transform: scale(1.05);
