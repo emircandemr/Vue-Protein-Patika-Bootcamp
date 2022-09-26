@@ -1,5 +1,7 @@
 # Vue 3 + Vite
 
+## Live: https://vue-examples-rick-and-morty-ed.vercel.app/#/
+
 ![image](https://user-images.githubusercontent.com/72731296/192333616-5743d499-290d-41f4-baff-d2b0a130372b.png)
 
 ![image](https://user-images.githubusercontent.com/72731296/192333675-fd5276f3-7fb0-47f9-8813-5f8ae2662825.png)
