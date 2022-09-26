@@ -10,7 +10,7 @@
 <template>
     
     <div class="characters_container"  >
-        <img class="characters_container__img" :src="props.character.image" />
+        <img class="characters_container__img" :src="props.character.img" />
         <p>{{props.character.name}}</p>
     </div>
 
@@ -20,7 +20,7 @@
 <style lang="scss" scoped >
 
     .characters_container{
-        width: 400px;
+        width: 300px;
         height: 300px;
         // background-color: #080308;
         background-color: #1b121b;
@@ -29,7 +29,7 @@
         justify-content: center;
         align-items: center;
         margin: 15px 20px;
-        padding: 10px;
+        padding: 8px;
         border-radius: 15px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         transition: all 0.3s ease-in-out;
@@ -42,7 +42,7 @@
         }
 
         &__img{
-            width: 90%;
+            width: 50%;
             height: 80%;
             margin-top: 10px;
             border-radius: 10px;

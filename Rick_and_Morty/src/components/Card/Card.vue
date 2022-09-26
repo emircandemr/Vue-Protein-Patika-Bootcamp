@@ -11,8 +11,8 @@
 
     <div class="content" >
         <template v-for="character in props.characters" >  <!-- template içine aldım çünkü router-link içinde flex özelliği çalışmadı  -->
-            <router-link :to="{name : 'CharacterPage' , params: {id : character.id}}" >
-                <CardItem :character="character" :key="character.id"   />
+            <router-link :to="{name : 'CharacterPage' , params: {id : character.char_id}}" >
+                <CardItem :character="character" :key="character.char_id"  />
             </router-link>
         </template>
     </div>

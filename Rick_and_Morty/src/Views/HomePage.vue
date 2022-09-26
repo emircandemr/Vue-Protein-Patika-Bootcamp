@@ -8,9 +8,8 @@
     const characters = ref([])
 
     const getCharacters = async () => {
-        const response = await axios.get('https://rickandmortyapi.com/api/character')
-        .then ( res => res )
-        return response.data.results
+        const response = await axios.get('https://www.breakingbadapi.com/api/characters')
+        return response.data
     }
 
     onMounted( async () => {
@@ -24,7 +23,7 @@
 
 <template>
     <div class="container">
-        <h1 class="title" >Rick And Morty</h1>
+        <h1 class="title" >Breaking Bad Characters</h1>
         <Card :characters="characters" />
     </div>
 

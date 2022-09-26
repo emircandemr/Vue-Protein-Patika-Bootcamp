@@ -10,8 +10,8 @@
 
     onMounted(() => {
         const id = route.params.id;
-        axios.get(`https://rickandmortyapi.com/api/character/${id}`)
-        .then(res => character.value = res.data)
+        axios.get(`https://www.breakingbadapi.com/api/characters/${id}`)
+        .then(res => character.value = res.data[0])
         });
  
 </script>
@@ -19,7 +19,7 @@
 <template>
     <div class="character_details">
         <div class="character_details__img" >
-            <img :src="character.image" />
+            <img :src="character.img" />
         </div>
         <div class="character_details__info" >
             <div class="character_details__title">
@@ -27,15 +27,15 @@
                 <h2> {{character.name}} </h2>
             </div>
             <div class="character_details__content">
-                <span>Species - {{character.species}} </span>
-                <span>Gender - {{character.gender}} </span>
-                <span class="description_title" > First seen in </span>
+                <span>Nickname- {{character.nickname}} </span>
+                <span>Birthday - {{character.birthday}} </span>
+                <span class="description_title" > Occupation </span>
+                <li v-for="occupation in character.occupation">
+                    {{occupation}}
+                </li>
+                <span class="description_title" > Portrayed</span>
                 <span>
-                    {{character.origin?.name }}
-                </span>
-                <span class="description_title" > Last know location </span>
-                <span>
-                    {{character.location?.name }}
+                    {{character.portrayed }}
                 </span>
             </div>
         </div>
@@ -46,16 +46,16 @@
 
     .character_details{
         width: 40%;
-        height: 40%;
+        height: 44%;
         display: flex;
         position: relative;
-        top: 30%;
+        top: 28%;
         left: 30%;
         border-radius: 15px;
         background-color: #1b121b;
 
         &__img{
-            width: 50%;
+            width: 40%;
             height: 100%;
             border-radius: 10px;
             img{
@@ -67,7 +67,7 @@
         }
     
         &__info{
-            width: 50%;
+            width: 60%;
             height: 100%;
             border-top-right-radius: 10px;
             border-bottom-right-radius: 10px;
@@ -125,10 +125,10 @@
     .Alive{
         background-color: #00ff00;
     }
-    .Dead{
+    .Deceased{
         background-color: #ff0000;
     }
-    .unknown{
+    .Presumed.dead{
         background-color: #0000ff;
     }
 
