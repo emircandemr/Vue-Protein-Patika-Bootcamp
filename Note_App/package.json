@@ -9,7 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.37"
+    "@incuca/vue3-toaster": "^1.1.1",
+    "vue": "^3.2.37",
+    "vue-moment": "^4.1.0",
+    "vue-toast-notification": "3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",

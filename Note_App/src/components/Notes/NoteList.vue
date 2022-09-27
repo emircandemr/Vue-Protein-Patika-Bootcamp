@@ -3,12 +3,22 @@ import NoteItem from './NoteItem.vue';
 
     const props = defineProps(["notes"])
 
+    const emits = defineEmits(["deleteNote", "completedNote"])
+
+    const completedHandler = (id) => {
+        emits("completedNote" , id)
+    }
+
+    const deleteHandler = (id) => {
+        emits("deleteNote" , id)
+    }
+
 </script>
 
 
 <template>
     <div class="notelist" >
-        <NoteItem v-for="note in notes" :note="note" />
+        <NoteItem v-for="note in notes" :note="note" @completedNote ="completedHandler" @deleteNote="deleteHandler"  />
     </div>
 
 </template>

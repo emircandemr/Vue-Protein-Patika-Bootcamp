@@ -3,6 +3,9 @@
   import { ref } from "vue";
   import Button from "./components/Button.vue";
   import NoteList from "./components/Notes/NoteList.vue";
+  import {useToast} from 'vue-toast-notification';
+
+  const $toast = useToast();
 
   const buttonNames = {
     all: "All",
@@ -11,29 +14,43 @@
   };
 
   const text = ref("");
+
   const notes = ref([])
 
-  
-  
-
+  const toaster = () => {
+    return $toast.success('Note Added', {
+        position: 'top-right',
+        duration: 2000,
+      });
+  }
+    
   const addNote = () => {
     const note = {
-    id: new Date().getTime(),
-    description: text.value,
-    completed: false,
+      id: new Date().getTime(),
+      createdAt : new Date().getTime(),
+      description: text.value,
+      completed: false,
     };
     notes.value = [ ...notes.value, note];
     text.value = "";
-  console.log(notes.value);
+    toaster();
   };
-  
+
+  const completedNote = (id) => {
+    const noteIndex = notes.value.findIndex((note) => note.id === id);
+    notes.value[noteIndex].completed = !notes.value[noteIndex].completed;
+    console.log(notes.value)
+  };
+
+  const deleteNote = () => {
+    notes.value = notes.value.filter((note) => note.completed === false);
+  };
 
 </script>
 
 
 <template>
   <div class="container" >
-   
     <h2 class="title" >Notes App</h2>
     <div class="noteGroup">
       <textarea class="noteGroup__textarea" v-model="text" @keydown.enter="addNote()" placeholder="Enter your note here" />
@@ -41,8 +58,7 @@
         <Button v-for="buttonName in buttonNames" :buttonName="buttonName" />
       </div>
     </div>
-    <NoteList :notes="notes" />
-    
+    <NoteList :notes="notes" @completedNote="completedNote" @deleteNote="deleteNote" />
   </div>
 </template>
 
