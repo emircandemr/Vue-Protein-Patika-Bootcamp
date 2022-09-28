@@ -18,14 +18,13 @@ import NoteItem from './NoteItem.vue';
 
 <template>
     <div class="notelist" >
-        <NoteItem v-for="note in notes" :note="note" @completedNote ="completedHandler" @deleteNote="deleteHandler"  />
+        <NoteItem v-for="note in notes" :note="note" :key="note.id" @completedNote ="completedHandler" @deleteNote="deleteHandler"  />
     </div>
 
 </template>
 
 
 <style lang="scss" scoped >
-
     .notelist{
         width: 90%;
         margin-top: 20px;

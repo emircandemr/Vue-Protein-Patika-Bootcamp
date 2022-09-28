@@ -15,23 +15,23 @@
 </script>
 
 <template>
-    <div class="card_back" >
+    <div class="card_back" :class="{'__completed' : note.completed}" >
         <div class="card_front" >
             <div class="card_front__header">
                 <div>
                     <i class="fa-regular fa-clock"></i>
                     <span  class="card_front__date" >{{ moment(note.createdAt).format("ddd,hA")}}</span>
                 </div>
-                <div class="card_front__backIcon">
-                    <i class="fa-solid fa-rotate-left"></i>
+                <div v-if="note.completed" class="card_front__backIcon">
+                    <i @click="completeHandler(note.id)" class="fa-solid fa-rotate-left"></i>
                 </div>
             </div>
-            <div class="card_front__text" :class="{'completed' : note.completed === true}" >
+            <div class="card_front__text" :class="{'completed' : note.completed}" >
                 {{note.description}}
             </div>
             <div class="card_front__button" >
-                <button class="card_front__button--delete" @click="deleteHandler(note.id)" >Delete</button>
-                <button class="card_front__button--complete" @click="completeHandler(note.id)" >Complete</button>
+                <button v-if="note.completed" class="card_front__button--delete" @click="deleteHandler(note.id)"> Delete </button>
+                <button v-else class="card_front__button--complete" @click="completeHandler(note.id)"> Complete </button>
             </div>
         </div>
     </div>
@@ -40,37 +40,46 @@
 
 <style lang="scss" scoped>
     .card_back{
-        width: 400px;
-        height: 230px;
-        background-color: #DCDCDC;
+        min-width: 380px;
+        min-height: 210px;
+        background-color: #ff9900;
+        border: 2px solid #212121;
+        border-radius: 8px;
         position: relative;
         border-radius: 8px;
         margin: 20px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        &.__completed{
+            background-color: #c32210;
+        }
+
     }
     .card_front{
-        width: 400px;
-        height: 230px;
-        background-color: #3A3B3C;
+        max-width: 380px;
+        min-height: 210px;
+        overflow-y: auto;
+        background-color: #18191A;
+        border: 2px solid #212121;
         border-radius: 8px;
         padding: 10px;
-        position: absolute;
+        position: relative  ;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        top:8px;
-        left: 8px;
+        top:5px;
+        left:5px;
 
         &__header{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            color: #fff;
+            color: #aaaaaa;
             font-size: 0.9rem;
             margin-bottom: 10px;
         }
 
         &__text{
-            color: #fff;
-            font-size: 1.2rem;
+            color: #cdcdcd;
+            font-size: 1rem;
             margin-bottom: 10px;
 
         }
@@ -91,22 +100,23 @@
             right: 15px;
 
             &--delete{
-                background-color: #E74C3C;
+                background-color: #c32210;
                 color: #fff;
                 border: none;
-                padding: 5px 10px;
+                padding: 8px 10px;
                 border-radius: 5px;
-                margin-right: 10px;
+                font-size: 10px;
                 cursor: pointer;
 
             }
 
             &--complete{
-                background-color: #2ECC71;
+                background-color: #ff9900;
                 color: #fff;
                 border: none;
-                padding: 5px 10px;
+                padding: 8px 10px;
                 border-radius: 5px;
+                font-size: 10px;
                 cursor: pointer;
             }
         }
@@ -114,5 +124,7 @@
     }
     .completed{
         text-decoration: line-through;
+        font-style: italic;
+        color: #aaaaaa;
     }
 </style>

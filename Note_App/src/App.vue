@@ -4,21 +4,22 @@
   import Button from "./components/Button.vue";
   import NoteList from "./components/Notes/NoteList.vue";
   import {useToast} from 'vue-toast-notification';
+  import { computed } from "@vue/reactivity";
 
   const $toast = useToast();
 
-  const buttonNames = {
-    all: "All",
-    active: "Active",
-    completed: "Completed",
-  };
+  const buttonNames = ref([
+    { name: "All", active: true , id:1 },
+    { name: "Active", active: false , id:2},
+    { name: "Completed", active: false , id:3},
+  ]);
 
   const text = ref("");
-
   const notes = ref([])
+  const activeButton = ref(buttonNames.name = "All"); // default olarak All butonu aktif olacak
 
-  const toaster = () => {
-    return $toast.success('Note Added', {
+  const toaster = (message) => {
+    return $toast.success(message, {
         position: 'top-right',
         duration: 2000,
       });
@@ -33,32 +34,58 @@
     };
     notes.value = [ ...notes.value, note];
     text.value = "";
-    toaster();
+    toaster("Note Added");
   };
 
   const completedNote = (id) => {
-    const noteIndex = notes.value.findIndex((note) => note.id === id);
-    notes.value[noteIndex].completed = !notes.value[noteIndex].completed;
-    console.log(notes.value)
+    const findNote = notes.value.find((note) => note.id === id);
+    findNote.completed = !findNote.completed;
   };
 
-  const deleteNote = () => {
-    notes.value = notes.value.filter((note) => note.completed === false);
+  const deleteNote = (id) => {
+    notes.value = notes.value.filter((note) =>note.id !== id);
+    toaster("Note Deleted");
   };
+
+  const filterNotes = (buttonName,buttonID) => { // Button compenentinden emits ile buttonName ve buttonID geliyor.
+    
+    console.log(buttonName)
+    activeButton.value = buttonName;  
+    buttonNames.value.map((button) => {
+      return button.id === buttonID ? button.active = true : button.active = false;
+    });
+  }
+
+  const filteredNotes = computed(() => {  
+    if (activeButton.value === (buttonNames.name = "Active")) {
+      return  notes.value.filter((note) => !note.completed);
+    } 
+    else if (activeButton.value === (buttonNames.name = "Completed")) {
+      return notes.value.filter((note) => note.completed);
+    } 
+    else {
+      return notes.value;
+    }
+  });
 
 </script>
 
 
 <template>
   <div class="container" >
-    <h2 class="title" >Notes App</h2>
+    <h2 class="title"> Notes App </h2>
     <div class="noteGroup">
       <textarea class="noteGroup__textarea" v-model="text" @keydown.enter="addNote()" placeholder="Enter your note here" />
       <div class="noteGroup__button">
-        <Button v-for="buttonName in buttonNames" :buttonName="buttonName" />
+        <Button v-for="buttonName in buttonNames" :key="buttonName.id" :buttonName="buttonName" @setButtonName="filterNotes" />
       </div>
     </div>
-    <NoteList :notes="notes" @completedNote="completedNote" @deleteNote="deleteNote" />
+    <template v-if="notes.length> 0" >
+      <NoteList :notes="filteredNotes" @completedNote="completedNote" @deleteNote="deleteNote" />
+    </template>
+    <template v-else >
+      <p class="empty"> Note List is Empty </p>
+    </template>
   </div>
 </template>
 
@@ -73,11 +100,13 @@
     justify-content: start;
     align-items: center;
   }
-  
   .title{
+    width: 40%;
+    text-align: center;
     font-size: 2rem;
     font-weight: 600;
-    margin: 20px 0px;
+    margin-top: 15px;
+    color: #ff9900;
   }
   .noteGroup{
     width: 40%;
@@ -87,22 +116,58 @@
     justify-content: center;
     align-items: center;
 
-
     &__textarea{
       width: 60%;
       height: 200px;
-      margin-top: 20px;
+      margin-top: 10px;
       padding: 10px;
-      border: 1px solid #ccc;
+      border: 2px solid #212121;
       border-radius: 5px;
       resize: none;
       font-size: 16px;
+      background-color: #18191A;
+      color: #dcdcdc;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+      &:focus{
+        outline: none;
+      }
     }
 
     &__button{
-      width: 40%;
+      width: 60%;
       display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
   }
+  .empty{
+    width: 40%;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 15px;
+    color: #ff9900;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .title{
+      width: 80%;
+    }
+    .noteGroup{
+      width: 80%;
+      &__textarea{
+        width: 100%;
+      }
+      &__button{
+        width: 100%;
+      }
+    }
+    .empty{
+      width: 80%;
+    }
+  }
+
 </style>
