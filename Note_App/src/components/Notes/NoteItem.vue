@@ -15,23 +15,23 @@
 </script>
 
 <template>
-    <div class="card_back" :class="{'__completed' : note.completed}" >
-        <div class="card_front" >
-            <div class="card_front__header">
+    <div class="card-back" :class="{'__completed' : note.completed}" >
+        <div class="card-front" >
+            <div class="card-front__header">
                 <div>
                     <i class="fa-regular fa-clock"></i>
-                    <span  class="card_front__date" >{{ moment(note.createdAt).format("ddd,hA")}}</span>
+                    <span  class="card-front__date" >{{ moment(note.createdAt).format("ddd,hA")}}</span>
                 </div>
-                <div v-if="note.completed" class="card_front__backIcon">
+                <div v-if="note.completed" class="card-front__backIcon">
                     <i @click="completeHandler(note.id)" class="fa-solid fa-rotate-left"></i>
                 </div>
             </div>
-            <div class="card_front__text" :class="{'completed' : note.completed}" >
+            <div class="card-front__text" :class="{'completed' : note.completed}" >
                 {{note.description}}
             </div>
-            <div class="card_front__button" >
-                <button v-if="note.completed" class="card_front__button--delete" @click="deleteHandler(note.id)"> Delete </button>
-                <button v-else class="card_front__button--complete" @click="completeHandler(note.id)"> Complete </button>
+            <div class="card-front__button" >
+                <button v-if="note.completed" class="card-front__button--delete" @click="deleteHandler(note.id)"> Delete </button>
+                <button v-else class="card-front__button--complete" @click="completeHandler(note.id)"> Complete </button>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
 
 
 <style lang="scss" scoped>
-    .card_back{
+    .card-back{
         min-width: 380px;
         min-height: 210px;
         background-color: #ff9900;
@@ -55,7 +55,7 @@
         }
 
     }
-    .card_front{
+    .card-front{
         max-width: 380px;
         min-height: 210px;
         overflow-y: auto;

@@ -1,12 +1,10 @@
 <script setup>
-    import { ref } from 'vue';
-
-    const props = defineProps(["buttonName","activeButton"])
+    const props = defineProps(["buttonName"])
 
     const emits = defineEmits(["setButtonName"])
 
-    const nameHandler = (buttonName,buttonID) => {
-        emits("setButtonName" , buttonName,buttonID)
+    const nameHandler = (name,id) => {
+        emits("setButtonName" , name,id)
 
     }
 
@@ -33,12 +31,7 @@
         border-radius: 5px;
         font-size: 14px;
         cursor: pointer;
-
-        // &:hover{
-        //     background-color: #212121;
-        //     color: #cdcdcd;
-        // }
-
+        transition: all 0.3s ease-in-out;
     }
 
     .active{

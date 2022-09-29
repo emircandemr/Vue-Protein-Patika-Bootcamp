@@ -47,12 +47,10 @@
     toaster("Note Deleted");
   };
 
-  const filterNotes = (buttonName,buttonID) => { // Button compenentinden emits ile buttonName ve buttonID geliyor.
-    
-    console.log(buttonName)
-    activeButton.value = buttonName;  
+  const filterNotes = (name,id) => { // Button componentinden emits ile buttonName ve buttonID geliyor.
+    activeButton.value = name;  
     buttonNames.value.map((button) => {
-      return button.id === buttonID ? button.active = true : button.active = false;
+      return button.id === id ? button.active = true : button.active = false;
     });
   }
 
@@ -74,9 +72,9 @@
 <template>
   <div class="container" >
     <h2 class="title"> Notes App </h2>
-    <div class="noteGroup">
-      <textarea class="noteGroup__textarea" v-model="text" @keydown.enter="addNote()" placeholder="Enter your note here" />
-      <div class="noteGroup__button">
+    <div class="note">
+      <textarea class="note__textarea" v-model="text" @keydown.enter="addNote()" placeholder="Enter your note here" />
+      <div class="note__button">
         <Button v-for="buttonName in buttonNames" :key="buttonName.id" :buttonName="buttonName" @setButtonName="filterNotes" />
       </div>
     </div>
@@ -108,7 +106,7 @@
     margin-top: 15px;
     color: #ff9900;
   }
-  .noteGroup{
+  .note{
     width: 40%;
     height: 300px;
     display: flex;
@@ -156,7 +154,7 @@
     .title{
       width: 80%;
     }
-    .noteGroup{
+    .note{
       width: 80%;
       &__textarea{
         width: 100%;
