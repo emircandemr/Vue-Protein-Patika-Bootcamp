@@ -43,7 +43,7 @@
   };
 
   const deleteNote = (id) => {
-    notes.value = notes.value.filter((note) =>note.id !== id);
+    notes.value = notes.value.filter((note) => note.id !== id);
     toaster("Note Deleted");
   };
 

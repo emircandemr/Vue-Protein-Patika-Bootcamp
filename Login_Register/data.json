@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "username": "emircandemr",
+      "email": "emircandemr@gmail.com",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "id": 1
+    },
+    {
+      "username": "test",
+      "email": "test@gmail.com",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "id": 2
+    }
+  ]
+}
