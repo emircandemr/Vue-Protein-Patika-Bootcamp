@@ -13,6 +13,7 @@
         return props.name.length > 1
     })
 
+   
 </script>
 
 
@@ -34,6 +35,7 @@
         width: 65%;
         margin-bottom: 20px;
         padding: 10px 0px;
+
         &__label {
             color: #EEBB4D;
             font-size: 1.2rem;
