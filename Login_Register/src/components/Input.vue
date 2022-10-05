@@ -19,6 +19,7 @@
 
 <template>
     <div class="textInput" >
+        {{nameValid}}
         <label for="text" class="textInput__label">{{props.label}}</label>
         <input type="text" id="text" autocomplete="off" :value="props.name" @input="nameHandler"  class="textInput__input" :class="{'notValid' : !nameValid}"  :placeholder="props.label" />
     </div>
