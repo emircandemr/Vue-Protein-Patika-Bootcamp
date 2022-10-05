@@ -6,7 +6,7 @@
 
 ## Start JSON Server
 
-• json-server --watch db.json
+• json-server --watch data.json
 
 ![image](https://user-images.githubusercontent.com/72731296/193453440-014b8786-ccfe-4cbc-946e-62c2214f5ea7.png)
 ![image](https://user-images.githubusercontent.com/72731296/193453446-913c8182-b8f8-4a21-85e8-5206ccc1092c.png)
