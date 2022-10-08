@@ -1,5 +1,4 @@
 <script setup>
-import { ref, computed } from 'vue'
 import Balance from "./components/Balance.vue"
 import Input from "./components/Input.vue"
 import Dashboard from "./components/Dashboard.vue"
@@ -10,13 +9,16 @@ import Dashboard from "./components/Dashboard.vue"
   <h1>Expense Tracker</h1>
   <div class="container" >
     <Balance />
-    <Dashboard />
-    <Input/>
+    <div class="container--content">
+      <Dashboard />
+      <Input/>
+    </div>
   </div >
 </template>
 
 
 <style lang="scss" scoped>
+
 
   .container{
     width: 50%;
@@ -27,6 +29,16 @@ import Dashboard from "./components/Dashboard.vue"
     border: 2px solid #212121;
     border-radius: 20px;
     padding: 20px;
+    margin-top: 50px;
+
+    &--content{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
   }
 
 </style>

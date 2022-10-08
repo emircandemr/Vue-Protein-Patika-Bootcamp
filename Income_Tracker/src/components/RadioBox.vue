@@ -11,9 +11,9 @@
 
 <template>
   <div>
-    <label class="rad-label">
+    <label class="rad-label" >
         <input type="radio" class="rad-input" name="rad" :value="props.type.text" @click="clickHandler" >
-        <div class="rad-design"></div>
+        <div class="rad-design" :class=props.type.text ></div>
         <div class="rad-text">{{type.text}}</div>
   </label>
   </div>
@@ -26,8 +26,7 @@
   align-items: center;
   border-radius: 100px;
   padding: 14px 16px;
-  margin: 20px 0 10px 0;
-
+  margin: 20px 5px 10px 5px;
   cursor: pointer;
   transition: .3s;
 }
@@ -51,9 +50,16 @@
   width: 22px;
   height: 22px;
   border-radius: 100px;
-
-  background: linear-gradient(to right bottom, hsl(154, 97%, 62%), hsl(225, 97%, 62%));
   position: relative;
+
+  &.Income {
+    background: linear-gradient(to right bottom, #799062 , #889e73);
+  }
+
+  &.Expense {
+    background: linear-gradient(to right bottom, #FF285C , #FF285C);
+  }
+
 }
 
 .rad-design::before {

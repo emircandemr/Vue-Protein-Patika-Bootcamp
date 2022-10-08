@@ -1,11 +1,18 @@
 <script setup>
+  import { computed } from "vue";
+  import {useStore} from "vuex"
+  const store = useStore()
+
+  const balance = computed( () => store.state.balance)
+
+  const statusCheck = () => balance.value < 0 ? "negative" : balance.value > 0 ? "positive" : ""
 
 </script>
 
 <template>
-  <div class="balance">
+  <div class="balance" :class="statusCheck()" >
     <h2>Your Balance</h2>
-    <h2>$50000</h2>
+    <h2>$ {{balance}}</h2>
   </div>
 </template>
 
@@ -23,7 +30,6 @@
         border-radius: 15px;
         padding: 15px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        
 
         h2{
         color: #fff;
@@ -34,6 +40,14 @@
         &:hover{
         background-color: #212121;
         border:  2px solid #121212;
+        }
+
+        &.negative{
+          border : 1px solid #FF285C;
+        }
+
+        &.positive{
+          border : 1px solid #799062;
         }
 
     }
