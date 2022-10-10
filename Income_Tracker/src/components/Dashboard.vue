@@ -1,9 +1,9 @@
 <script setup>
-    import { ref,reactive } from 'vue'
+    import { ref } from 'vue'
     import RadioBox from './RadioBox.vue';
+    import ModalComp from './Modal/Modal.vue';
+    
     import {useStore} from "vuex"
-    import { computed } from "vue";
-
     const store = useStore()
     
     const radioName = ref(
@@ -14,24 +14,13 @@
     )
 
     const radioType = ref("")
-    const text = ref("")
-    const amount = ref("")
+
 
     const selectType = (type) => {
         radioType.value = type
+        store.commit("changeModalState")
     }
 
-    const addList = () => {
-        const list = {
-            id: Math.floor(Math.random() * 100000000),
-            text: text.value,
-            amount: +amount.value,
-            type: radioType.value
-        };
-        text.value = ""
-        amount.value = ""
-        store.commit("addIncomeList", {list, radioType} )
-        }
 
 </script>
 
@@ -40,11 +29,9 @@
     <div class="dashboard__type">
         <RadioBox v-for="name in radioName" :type="name" @onSelect="selectType"></RadioBox>
     </div> 
-    <div class="dashboard__input">
-        <input v-model="text" class="dashboard__input__text" type="text" placeholder="Add Description" />
-        <input v-model="amount" class="dashboard__input__value" type="text" placeholder="Add Value" />
-        <button @click="addList" class="dashboard__input__btn">Add</button>
-    </div>
+    <Teleport to="body">
+        <ModalComp :radioType="radioType" />
+    </Teleport>
   </div>
 
 </template>

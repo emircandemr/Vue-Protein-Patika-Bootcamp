@@ -6,7 +6,7 @@ import Dashboard from "./components/Dashboard.vue"
 </script>
 
 <template>
-  <h1>Expense Tracker</h1>
+  <h1>Income & Expense Tracker</h1>
   <div class="container" >
     <Balance />
     <div class="container--content">

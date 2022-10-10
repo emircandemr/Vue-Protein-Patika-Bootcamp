@@ -1,6 +1,7 @@
 <script setup>
   import {useStore} from "vuex"
   import { ref, computed } from 'vue'
+  import ModalComp from "./Modal/Modal.vue";
   
   const store = useStore()
   const incomeList = computed( () => store.state.incomeList)
@@ -8,6 +9,11 @@
   const destroy = (id) => {
     console.log(id)
     store.commit("deleteIncomeList",id)
+  }
+
+  const edit = (id) => {
+    console.log(id)
+    store.commit("changeModalState")
   }
 
 </script>
@@ -19,14 +25,17 @@
     </div>
     <div class="input__value">
        <span class="input__value--text">$ {{item.amount}}</span>
-       <span class="material-symbols-outlined">
-      edit
+       <span class="material-symbols-outlined" @click="edit(item.id)">
+          edit
       </span>
        <span class="material-symbols-outlined" @click="destroy(item.id)" >
           close
       </span>
     </div>
   </div>
+  <Teleport to="body">
+        <ModalComp :radioType="radioType" > </ModalComp>
+    </Teleport>
 </template>
 
 
