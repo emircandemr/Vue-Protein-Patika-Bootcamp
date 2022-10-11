@@ -1,10 +1,14 @@
 <script setup>
+    import {useStore} from "vuex"
+    const store = useStore()
+
 
     const props = defineProps(["type"])
-    const emits = defineEmits(["onSelect"])
+    // const emits = defineEmits(["onSelect"])
 
     const clickHandler = (e) => {
-        emits("onSelect", e.target.value)
+       store.commit("changeType",e.target.value)
+       store.commit("changeModalState")
     }
 
 </script>

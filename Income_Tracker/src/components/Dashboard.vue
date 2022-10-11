@@ -13,24 +13,15 @@
         ]
     )
 
-    const radioType = ref("")
-
-
-    const selectType = (type) => {
-        radioType.value = type
-        store.commit("changeModalState")
-    }
-
-
 </script>
 
 <template>
   <div class="dashboard">
     <div class="dashboard__type">
-        <RadioBox v-for="name in radioName" :type="name" @onSelect="selectType"></RadioBox>
+        <RadioBox v-for="name in radioName" :type="name" ></RadioBox>
     </div> 
     <Teleport to="body">
-        <ModalComp :radioType="radioType" />
+        <ModalComp :deneme="radioType" />
     </Teleport>
   </div>
 

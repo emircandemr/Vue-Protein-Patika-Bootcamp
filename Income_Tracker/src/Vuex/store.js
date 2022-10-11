@@ -4,11 +4,16 @@ const store = createStore({
 
     state : {
         balance : 0,
+        type : "",
         isModalActive : false,
         incomeList : [],
+
     },
 
     mutations : {
+        changeType : (state, payload) => {
+            state.type = payload
+        },
         addIncomeList (state, payload){
             state.incomeList = [...state.incomeList , payload.list]
             const income = state.incomeList.filter((item) => item.type === 'Income').map((item) => item.amount);
@@ -30,7 +35,6 @@ const store = createStore({
                 console.log('expense');
                 state.balance = state.balance + selected[0].amount}
             state.incomeList =  state.incomeList.filter((item) => item.id !== payload)
-
         },
         editIncomeList(state,payload){
             const selected = state.incomeList.filter((item) => item.id === payload.id);

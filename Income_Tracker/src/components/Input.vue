@@ -13,6 +13,8 @@
 
   const edit = (id) => {
     console.log(id)
+    const selected = incomeList.value.find(item => item.id === id)
+    console.log(selected)
     store.commit("changeModalState")
   }
 
@@ -34,7 +36,7 @@
     </div>
   </div>
   <Teleport to="body">
-        <ModalComp :radioType="radioType" > </ModalComp>
+        <ModalComp > </ModalComp>
     </Teleport>
 </template>
 

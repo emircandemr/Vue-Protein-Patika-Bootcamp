@@ -3,19 +3,20 @@
     import {useStore} from "vuex"
     const store = useStore()
     
-    const props = defineProps(["radioType"])
+    const props = defineProps(["deneme"])
 
     const text = ref("")
     const amount = ref("")
 
     const modalState = computed(() => store.state.isModalActive)
+    const type = computed(() => store.state.type)
 
     const addList = () => {
         const list = {
-            id: Math.floor(Math.random() * 100000000),
+            id: new Date().getTime(),
             text: text.value,
             amount: +amount.value,
-            type: props.radioType,
+            type : type.value
         };
         text.value = ""
         amount.value = ""
@@ -29,7 +30,7 @@
     <div v-if="modalState" class="modal">
         <div class="modal--layer"></div>
         <div class="modal--content">
-            <h2>{{props.radioType}}</h2>
+            <h2>{{type}}</h2>
             <input v-model="text" class="modal--content__text" type="text" placeholder="Add Description" />
             <input v-model="amount" class="modal--content__value" type="text" placeholder="Add Value" />
             <button @click="addList" class="modal--content__btn">Add</button>
