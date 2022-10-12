@@ -18,10 +18,11 @@
             amount: +amount.value,
             type : type.value
         };
-        text.value = ""
-        amount.value = ""
+        if(text.value === "" || amount.value === "") return
         store.commit("addIncomeList", {list, radioType : props.radioType} )
         store.commit("changeModalState")
+        amount.value = ""
+        text.value = ""
         }
 
 </script>

@@ -7,7 +7,6 @@ const store = createStore({
         type : "",
         isModalActive : false,
         incomeList : [],
-
     },
 
     mutations : {
