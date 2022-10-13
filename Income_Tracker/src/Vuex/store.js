@@ -40,14 +40,13 @@ const store = createStore({
             state.incomeList =  state.incomeList.filter((item) => item.id !== payload)
         },
         editIncomeList(state,payload){
-        
-            
-            // const selected = state.incomeList.filter((item) => item.id === payload.id);
-            // if(selected[0].type == 'Income'){
-            //     state.balance = state.balance - selected[0].amount + payload.amount}
-            // else{
-            //     state.balance = state.balance + selected[0].amount - payload.amount}
-            // state.incomeList =  state.incomeList.map((item) => item.id === payload.id ? payload : item)
+            const selected = state.incomeList.filter((item) => item.id === payload.id);
+            if(selected[0].type == 'Income'){
+                state.balance = state.balance - selected[0].amount + payload.amount}
+            else{
+                state.balance = state.balance + selected[0].amount - payload.amount}
+            state.incomeList =  state.incomeList.filter((item) => item.id !== payload.id)
+            state.incomeList = [...state.incomeList , payload]
         }
     },
 })

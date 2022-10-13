@@ -8,11 +8,16 @@ const store = useStore()
 const props = defineProps(["selected"])
 
 const isEditModalActive = computed(() => store.state.isEditModalActive)
-const list = computed(() => store.state.incomeList?.find(item => item.id === props.selected))
+const list = computed(() => store.state.incomeList.find(item => item.id === props.selected))
+
+const editText = ref("")
+const editAmount = ref("")
 
 
-const editList = () => {
-    console.log(list.text)
+const editModalHandler = () => {
+    store.commit("editIncomeList", 
+    {id: props.selected, text: editText.value, amount: +editAmount.value, type: list.value.type})
+    store.commit("changeEditModalState")
 }
 
 </script>
@@ -22,10 +27,10 @@ const editList = () => {
         <div class="modal--layer"></div>
         <div class="modal--content">
             <h2>Edit</h2>
-            {{list.text}}
-            <InputComp v-model:value="list.text" ></InputComp>
-            <InputComp v-model:value="list.amount" ></InputComp>
-            <button @click="editList" class="modal--content__btn">Add</button>
+            {{editText}}
+            <InputComp v-model:value="editText" ></InputComp>
+            <InputComp v-model:value="editAmount" ></InputComp>
+            <button @click="editModalHandler" class="modal--content__btn">Add</button>
         </div>
     </div>
 </template>
