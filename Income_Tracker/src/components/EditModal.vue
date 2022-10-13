@@ -1,48 +1,38 @@
 <script setup>
-    import { ref ,computed} from 'vue'
-    import {useStore} from "vuex"
-    import InputComp from '../Input.vue';
-    const store = useStore()
-    
-    const modalState = computed(() => store.state.isModalActive)
-    const type = computed(() => store.state.type)
 
-    const text = ref("")
-    const amount = ref("")
+import {useStore} from "vuex"
+import { computed , ref ,reactive} from "vue";
+import InputComp from './Input.vue';
+const store = useStore()
 
-    const addList = () => {
-        const list = {
-            id: new Date().getTime(),
-            text: text.value,
-            amount: +amount.value,
-            type : type.value
-        };
-        if(text.value === "" || amount.value === "") return
-        store.commit("addIncomeList", {list} )
-        store.commit("changeModalState")
-        console.log(text.value)
-        amount.value = ""
-        text.value = ""
-        }
+const props = defineProps(["selected"])
+
+const isEditModalActive = computed(() => store.state.isEditModalActive)
+const list = computed(() => store.state.incomeList?.find(item => item.id === props.selected))
+
+
+const editList = () => {
+    console.log(list.text)
+}
 
 </script>
 
 <template>
-    <div v-if="modalState" class="modal">
+    <div v-if="isEditModalActive" class="modal">
         <div class="modal--layer"></div>
         <div class="modal--content">
-            <h2>{{type}}</h2>
-            {{text}}
-            <InputComp v-model:value="text" ></InputComp>
-            <InputComp v-model:value="amount" ></InputComp>
-            <button @click="addList" class="modal--content__btn">Add</button>
+            <h2>Edit</h2>
+            {{list.text}}
+            <InputComp v-model:value="list.text" ></InputComp>
+            <InputComp v-model:value="list.amount" ></InputComp>
+            <button @click="editList" class="modal--content__btn">Add</button>
         </div>
     </div>
 </template>
 
-<style lang="scss" scoped>
 
-    .modal{
+<style lang="scss" scoped>
+.modal{
         width: 100%;
         height: 100%;
         position: fixed;
@@ -91,5 +81,4 @@
         }
 
     }
-
 </style>

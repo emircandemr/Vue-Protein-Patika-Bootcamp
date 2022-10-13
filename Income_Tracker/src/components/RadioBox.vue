@@ -2,9 +2,8 @@
     import {useStore} from "vuex"
     const store = useStore()
 
-
     const props = defineProps(["type"])
-    // const emits = defineEmits(["onSelect"])
+    // const emits = defineEmits(["onSelect"])np
 
     const clickHandler = (e) => {
        store.commit("changeType",e.target.value)

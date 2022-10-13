@@ -6,6 +6,7 @@ const store = createStore({
         balance : 0,
         type : "",
         isModalActive : false,
+        isEditModalActive : false,
         incomeList : [],
     },
 
@@ -24,6 +25,9 @@ const store = createStore({
         changeModalState (state){
             state.isModalActive = !state.isModalActive;
         },
+        changeEditModalState (state){
+            state.isEditModalActive = !state.isEditModalActive;
+        },
         deleteIncomeList(state,payload){
             const selected = state.incomeList.filter((item) => item.id === payload);
             console.log(selected);
@@ -36,12 +40,14 @@ const store = createStore({
             state.incomeList =  state.incomeList.filter((item) => item.id !== payload)
         },
         editIncomeList(state,payload){
-            const selected = state.incomeList.filter((item) => item.id === payload.id);
-            if(selected[0].type == 'Income'){
-                state.balance = state.balance - selected[0].amount + payload.amount}
-            else{
-                state.balance = state.balance + selected[0].amount - payload.amount}
-            state.incomeList =  state.incomeList.map((item) => item.id === payload.id ? payload : item)
+        
+            
+            // const selected = state.incomeList.filter((item) => item.id === payload.id);
+            // if(selected[0].type == 'Income'){
+            //     state.balance = state.balance - selected[0].amount + payload.amount}
+            // else{
+            //     state.balance = state.balance + selected[0].amount - payload.amount}
+            // state.incomeList =  state.incomeList.map((item) => item.id === payload.id ? payload : item)
         }
     },
 })

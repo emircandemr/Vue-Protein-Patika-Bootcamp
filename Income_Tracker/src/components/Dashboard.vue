@@ -1,8 +1,8 @@
 <script setup>
     import { ref } from 'vue'
     import RadioBox from './RadioBox.vue';
-    import ModalComp from './Modal/Modal.vue';
-    
+    import Modal from './Modal/Modal.vue';
+    import InputComp from "./Input.vue"
     import {useStore} from "vuex"
     const store = useStore()
     
@@ -13,6 +13,8 @@
         ]
     )
 
+
+
 </script>
 
 <template>
@@ -21,7 +23,8 @@
         <RadioBox v-for="name in radioName" :type="name" ></RadioBox>
     </div> 
     <Teleport to="body">
-        <ModalComp :deneme="radioType" />
+        <Modal>
+        </Modal>
     </Teleport>
   </div>
 

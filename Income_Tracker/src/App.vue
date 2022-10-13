@@ -1,6 +1,6 @@
 <script setup>
 import Balance from "./components/Balance.vue"
-import Input from "./components/Input.vue"
+import Input from "./components/InputList.vue"
 import Dashboard from "./components/Dashboard.vue"
 
 </script>
