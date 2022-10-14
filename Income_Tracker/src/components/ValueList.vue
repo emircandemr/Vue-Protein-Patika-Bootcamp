@@ -1,31 +1,28 @@
 <script setup>
   import {useStore} from "vuex"
   import { ref, computed } from 'vue'
-  import ModalComp from "./Modal/Modal.vue";
-import EditModal from "./EditModal.vue";
-  
+  import EditModal from "./EditModal.vue";
+  import {deleteValue} from "../service/local"
+    
   const store = useStore()
-  const incomeList = computed( () => store.state.incomeList)
+  const valueList = computed( () => store.state.valueList)
   
   const destroy = (id) => {
-    console.log(id)
-    store.commit("deleteIncomeList",id)
+    store.commit("deleteValueList",id)
+    deleteValue(id)
   }
 
   const selectedID = ref()
-  const selected = ref("")
 
   const edit = (id) => {
     selectedID.value = id
-    const selected = incomeList.value.find(item => item.id === id)
-    // console.log(selected)
     store.commit("changeEditModalState")
   }
 
 </script>
 
 <template >
-  <div v-for="item in incomeList" class="input" :class=item.type>
+  <div v-for="item in valueList" class="input" :class=item.type>
     <div class="input__text">
       {{item.text}}
     </div>

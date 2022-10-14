@@ -21,15 +21,6 @@
         display: flex;
         justify-content: center;
         align-self: center;
-        // border: none;
-        // background-color: #121212;
-        // border: 2px solid #212121;
-        // border-radius: 15px;
-        // padding: 5px 15px;
-        // font-size: 1.2rem;
-        // color: #dcdcdc;
-        // outline: none;
-        // margin-right: 10px;
 
         &--content{
             width: 60%;

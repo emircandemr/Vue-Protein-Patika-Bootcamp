@@ -1,15 +1,20 @@
 
-export const getLocalPosts = () => {
-    const data = localStorage.getItem('posts');
-    const posts = JSON.parse(data);
-    return posts;
+export const getValueList = () => {
+    const data = localStorage.getItem('values');
+    const values = JSON.parse(data);
+    return values;
 }
   
-export const saveLocalPost = post => {
-    const data = localStorage.getItem('posts');
-    let posts = JSON.parse(data);
-    posts = posts.concat(post);
-    localStorage.setItem('posts', posts);
-
-return posts;
+export const setValueList = value => {
+    const data = localStorage.getItem('values') ? JSON.parse(localStorage.getItem('values')) : [];
+    let values = data.concat(value);
+    localStorage.setItem('values', JSON.stringify(values))
 }
+
+export const deleteValue = id => {
+    const data = localStorage.getItem('values') ? JSON.parse(localStorage.getItem('values')) : [];
+    const values = data.filter((item) => item.id !== id)
+    localStorage.setItem('values', JSON.stringify(values))
+}
+
+

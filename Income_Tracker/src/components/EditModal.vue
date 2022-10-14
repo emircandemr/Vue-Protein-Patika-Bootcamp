@@ -1,22 +1,25 @@
 <script setup>
-
+import { computed , ref} from "vue";
 import {useStore} from "vuex"
-import { computed , ref ,reactive} from "vue";
-import InputComp from './Input.vue';
-const store = useStore()
+import ValueComp from './Value.vue';
 
+const store = useStore()
 const props = defineProps(["selected"])
 
 const isEditModalActive = computed(() => store.state.isEditModalActive)
-const list = computed(() => store.state.incomeList.find(item => item.id === props.selected))
+const list = computed(() => store.state.valueList.find(item => item.id === props.selected))
 
 const editText = ref("")
 const editAmount = ref("")
 
 
 const editModalHandler = () => {
-    store.commit("editIncomeList", 
+    store.commit("editValueList", 
     {id: props.selected, text: editText.value, amount: +editAmount.value, type: list.value.type})
+    store.commit("changeEditModalState")
+}
+
+const closeHandler = () => {
     store.commit("changeEditModalState")
 }
 
@@ -27,10 +30,14 @@ const editModalHandler = () => {
         <div class="modal--layer"></div>
         <div class="modal--content">
             <h2>Edit</h2>
-            {{editText}}
-            <InputComp v-model:value="editText" ></InputComp>
-            <InputComp v-model:value="editAmount" ></InputComp>
+            <ValueComp v-model:value="editText" ></ValueComp>
+            <ValueComp v-model:value="editAmount" ></ValueComp>
             <button @click="editModalHandler" class="modal--content__btn">Add</button>
+            <div class="modal--content__icon" @click="closeHandler">
+                <span class="material-symbols-outlined">
+                    close
+                </span>
+            </div>
         </div>
     </div>
 </template>
@@ -69,11 +76,25 @@ const editModalHandler = () => {
             align-items: center;
             transition: all 0.3s ease-in-out;
 
+            h2{
+                color: #fff;
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            &__icon{
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                padding: 10px;
+                cursor: pointer;
+            }
+
 
             &__btn{
                 width: 60%;
                 margin: 1rem 0px;
-                border: none;
+                border: 1px solid #212121;
                 background-color: #212121;
                 border-radius: 15px;
                 padding: 5px 15px;
@@ -81,6 +102,13 @@ const editModalHandler = () => {
                 color: #dcdcdc;
                 outline: none;
                 cursor: pointer;
+
+                &:hover{
+                    background-color: #121212;
+                    border: 1px solid #212121;
+                }
+
+
             }
 
         }

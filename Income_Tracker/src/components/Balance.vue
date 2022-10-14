@@ -30,6 +30,7 @@
         border-radius: 15px;
         padding: 15px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        margin: 15px;
 
         h2{
         color: #fff;
