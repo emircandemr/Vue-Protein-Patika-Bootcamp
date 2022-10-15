@@ -2,6 +2,7 @@
 import { computed , ref} from "vue";
 import {useStore} from "vuex"
 import InputComp from './Input.vue';
+import {editValue} from "../service/local"
 
 const store = useStore()
 const props = defineProps(["selected"])
@@ -14,9 +15,15 @@ const editAmount = ref("")
 
 
 const editModalHandler = () => {
-    store.commit("editValueList", 
-    {id: props.selected, text: editText.value, amount: +editAmount.value, type: list.value.type})
+    const editList = {
+        id: props.selected,
+        text: editText.value,
+        amount: +editAmount.value,
+        type : list.value.type
+    };
+    store.commit("editValueList", editList)
     store.commit("changeEditModalState")
+    editValue(editList)
 }
 
 const closeHandler = () => {

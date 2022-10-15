@@ -1,6 +1,5 @@
 import {createStore} from 'vuex'
 import { getValueList } from '../service/local'
-
 const store = createStore({
 
     state : {
@@ -41,9 +40,11 @@ const store = createStore({
         editValueList(state,payload){
             const selected = state.valueList.filter((item) => item.id === payload.id);
             if(selected[0].type == 'Income'){
-                state.balance = state.balance - selected[0].amount + payload.amount}
+                state.balance = state.balance - selected[0].amount + payload.amount
+            }
             else{
-                state.balance = state.balance + selected[0].amount - payload.amount}
+                state.balance = state.balance + selected[0].amount - payload.amount
+            }
             state.valueList =  state.valueList.filter((item) => item.id !== payload.id)
             state.valueList = [...state.valueList , payload]
         }
