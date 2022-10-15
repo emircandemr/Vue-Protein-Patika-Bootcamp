@@ -1,7 +1,7 @@
 <script setup>
 import { computed , ref} from "vue";
 import {useStore} from "vuex"
-import ValueComp from './Value.vue';
+import InputComp from './Input.vue';
 
 const store = useStore()
 const props = defineProps(["selected"])
@@ -30,8 +30,8 @@ const closeHandler = () => {
         <div class="modal--layer"></div>
         <div class="modal--content">
             <h2>Edit</h2>
-            <ValueComp v-model:value="editText" ></ValueComp>
-            <ValueComp v-model:value="editAmount" ></ValueComp>
+            <InputComp v-model:value="editText" ></InputComp>
+            <InputComp v-model:value="editAmount" ></InputComp>
             <button @click="editModalHandler" class="modal--content__btn">Add</button>
             <div class="modal--content__icon" @click="closeHandler">
                 <span class="material-symbols-outlined">

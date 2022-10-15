@@ -1,11 +1,12 @@
 <script setup>
     import { ref ,computed} from 'vue'
     import {useStore} from "vuex"
-    import InputComp from './Value.vue';
+    import InputComp from './Input.vue';
     import {setValueList} from "../service/local"
+
     const store = useStore()
     
-    const modalState = computed(() => store.state.isModalActive)
+    const isModalState = computed(() => store.state.isModalActive)
     const type = computed(() => store.state.type)
 
     const text = ref("")
@@ -19,21 +20,21 @@
             type : type.value
         };
         if(text.value === "" || amount.value === "") return
-        setValueList(list)
-        store.commit("addValueList", {list} )
-        store.commit("changeModalState")
+        setValueList(list) // added to local storage
+        store.commit("addValueList",{list})
+        store.commit("changeModalState")    
         amount.value = ""
         text.value = ""
         }
 
     const closeHandler = () => {
-        store.commit("changeModalState")
+        store.commit("changeModalState") // close modal 
     }
 
 </script>
 
 <template>
-    <div v-if="modalState" class="modal">
+    <div v-if="isModalState" class="modal">
         <div class="modal--layer"></div>
         <div class="modal--content">
             <h2>{{type}}</h2>

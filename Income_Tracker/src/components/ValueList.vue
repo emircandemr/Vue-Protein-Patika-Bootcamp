@@ -7,14 +7,14 @@
   const store = useStore()
   const valueList = computed( () => store.state.valueList)
   
-  const destroy = (id) => {
+  const destroyHandler = (id) => {
     store.commit("deleteValueList",id)
     deleteValue(id)
   }
 
   const selectedID = ref()
 
-  const edit = (id) => {
+  const editHandler = (id) => {
     selectedID.value = id
     store.commit("changeEditModalState")
   }
@@ -28,17 +28,17 @@
     </div>
     <div class="input__value">
        <span class="input__value--text">$ {{item.amount}}</span>
-       <span class="material-symbols-outlined" @click="edit(item.id)">
+       <span class="material-symbols-outlined" @click="editHandler(item.id)">
           edit
       </span>
-       <span class="material-symbols-outlined" @click="destroy(item.id)" >
+       <span class="material-symbols-outlined" @click="destroyHandler(item.id)" >
           close
       </span>
     </div>
   </div>
-  <Teleport to="body">
-        <EditModal :selected = "selectedID" />
-    </Teleport>
+  <Teleport to="#modal">
+      <EditModal :selected = "selectedID" />
+  </Teleport>
 </template>
 
 

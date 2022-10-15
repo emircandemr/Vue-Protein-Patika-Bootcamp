@@ -29,7 +29,7 @@ const radioName = ref(
         </div>
     </div>
   </div>
-    <Teleport to="body">
+    <Teleport to="#modal">
         <AddModal></AddModal>
     </Teleport>
 </template>
