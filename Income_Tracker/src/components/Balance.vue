@@ -1,5 +1,5 @@
 <script setup>
-  import { computed } from "vue";
+  import {computed} from "vue";
   import {useStore} from "vuex"
   const store = useStore()
 
@@ -18,7 +18,6 @@
 
 
 <style lang="scss" scoped>
-
     .balance{
         width: 30%;
         display: flex;
@@ -31,26 +30,30 @@
         padding: 15px;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         margin: 15px;
-
         h2{
         color: #fff;
         font-size: 1.5rem;
         margin: 10px 0;
         }
-
         &:hover{
         background-color: #212121;
         border:  2px solid #121212;
         }
-
         &.negative{
           border : 1px solid #FF285C;
         }
-
         &.positive{
           border : 1px solid #799062;
         }
-
     }
-
+    @media screen and (max-width: 768px){
+        .balance{
+            width: 40%;
+        }
+    }
+    @media screen and (max-width: 500px){
+        .balance{
+            width: 60%;
+        }
+    }
 </style>

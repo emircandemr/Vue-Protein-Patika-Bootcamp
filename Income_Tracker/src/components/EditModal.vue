@@ -21,9 +21,12 @@ const editModalHandler = () => {
         amount: +editAmount.value,
         type : list.value.type
     };
+    if(editText.value === "" || editAmount.value === "") return
     store.commit("editValueList", editList)
     store.commit("changeEditModalState")
     editValue(editList)
+    editText.value = ""
+    editAmount.value = ""
 }
 
 const closeHandler = () => {
@@ -39,7 +42,7 @@ const closeHandler = () => {
             <h2>Edit</h2>
             <InputComp v-model:value="editText" ></InputComp>
             <InputComp v-model:value="editAmount" ></InputComp>
-            <button @click="editModalHandler" class="modal--content__btn">Add</button>
+            <button @click="editModalHandler" class="modal--content__btn">Save</button>
             <div class="modal--content__icon" @click="closeHandler">
                 <span class="material-symbols-outlined">
                     close
@@ -59,15 +62,12 @@ const closeHandler = () => {
         left: 0;
         z-index: 99;
         transition: all 0.3s ease-in-out;
-
-
         &--layer{
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.582);
             transition: all 0.3s ease-in-out;
         }
-
         &--content{
             width: 50%;
             height: 50%;
@@ -82,13 +82,11 @@ const closeHandler = () => {
             justify-content: center;
             align-items: center;
             transition: all 0.3s ease-in-out;
-
             h2{
                 color: #fff;
                 font-size: 2rem;
                 margin-bottom: 1rem;
             }
-
             &__icon{
                 position: absolute;
                 top: 10px;
@@ -96,8 +94,6 @@ const closeHandler = () => {
                 padding: 10px;
                 cursor: pointer;
             }
-
-
             &__btn{
                 width: 60%;
                 margin: 1rem 0px;
@@ -109,16 +105,52 @@ const closeHandler = () => {
                 color: #dcdcdc;
                 outline: none;
                 cursor: pointer;
-
                 &:hover{
                     background-color: #121212;
                     border: 1px solid #212121;
                 }
-
-
             }
-
         }
-
+    }
+    @media screen and (max-width: 1350px){
+      .modal{
+        &--content{
+            width: 60%;
+            height: 40%;
+        }
+      }
+    }
+    @media screen and (max-width: 1200px){
+      .modal{
+        &--content{
+            width: 70%;
+            height: 40%;
+        }
+      }
+    }
+    @media screen and (max-width: 1000px){
+        .modal{
+            &--content{
+                width: 80%;
+                height: 40%;
+            }
+        }
+    }
+    @media screen and (max-width: 800px){
+        .modal{
+            &--content{
+                width: 90%;
+                height: 40%;
+            }
+        }
+    }
+    @media screen and (max-width: 600px){
+        .modal{
+            &--content{
+                width: 100%;
+                height: 40%;
+                border-radius: 0px;
+            }
+        }
     }
 </style>

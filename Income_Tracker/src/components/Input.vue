@@ -4,7 +4,7 @@
     const emits = defineEmits(["update:value"])
 
     const valueHandler = (e) => {
-        emits("update:value", e.target.value)
+        emits("update:value", e.target.value)  
     }
 
 </script>
@@ -21,7 +21,6 @@
         display: flex;
         justify-content: center;
         align-self: center;
-
         &--content{
             width: 60%;
             border: none;
@@ -34,8 +33,14 @@
             outline: none;
             margin: 10px 0px;
         }
-
     }
-    
+
+    @media screen and (max-width: 768px){
+        .input{
+            &--content{
+                width: 80%;
+            }
+        }
+    }
 
 </style>

@@ -3,12 +3,14 @@
     import {useStore} from "vuex"
     import InputComp from './Input.vue';
     import {setValueList} from "../service/local"
+    import {toast} from "./Notification/Toastify.js"
 
     const store = useStore()
     
     const isModalState = computed(() => store.state.isModalActive)
     const type = computed(() => store.state.type)
 
+    const notification = ref([])
     const text = ref("")
     const amount = ref("")
 
@@ -25,6 +27,7 @@
         store.commit("changeModalState")    
         amount.value = ""
         text.value = ""
+        notification.value.push(toast().success("Added Successfully")) // added to notification
         }
 
     const closeHandler = () => {
@@ -48,6 +51,7 @@
             </div>
         </div>
     </div>
+    <notification-list :notifications="notification" />
 </template>
 
 <style lang="scss" scoped>
@@ -60,7 +64,6 @@
         left: 0;
         z-index: 99;
         transition: all 0.3s ease-in-out;
-
 
         &--layer{
             width: 100%;
@@ -90,7 +93,6 @@
                 margin: 10px 0;
             }
 
-
             &__btn{
                 width: 60%;
                 margin: 1rem 0px;
@@ -107,7 +109,6 @@
                     background-color: #121212;
                     border: 1px solid #212121;
                 }
-
             }
 
             &__icon{
@@ -117,10 +118,48 @@
                 padding: 10px;
                 cursor: pointer;
             }
-
-
         }
-
     }
-
+    
+    @media screen and (max-width: 1350px){
+      .modal{
+        &--content{
+            width: 60%;
+            height: 40%;
+        }
+      }
+    }
+    @media screen and (max-width: 1200px){
+      .modal{
+        &--content{
+            width: 70%;
+            height: 40%;
+        }
+      }
+    }
+    @media screen and (max-width: 1000px){
+        .modal{
+            &--content{
+                width: 80%;
+                height: 40%;
+            }
+        }
+    }
+    @media screen and (max-width: 800px){
+        .modal{
+            &--content{
+                width: 90%;
+                height: 40%;
+            }
+        }
+    }
+    @media screen and (max-width: 600px){
+        .modal{
+            &--content{
+                width: 100%;
+                height: 40%;
+                border-radius: 0px;
+            }
+        }
+    }
 </style>

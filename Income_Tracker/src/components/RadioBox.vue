@@ -5,7 +5,7 @@
     const props = defineProps(["type"])
 
     const clickHandler = (e) => {
-       store.commit("changeType",e.target.value)
+       store.commit("changeType",e.target.value) 
        store.commit("changeModalState")
     }
 

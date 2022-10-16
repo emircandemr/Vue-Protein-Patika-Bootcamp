@@ -1,9 +1,9 @@
 import {createStore} from 'vuex'
-import { getValueList } from '../service/local'
+import { getValueList ,getBalance} from '../service/local'
 const store = createStore({
 
     state : {
-        balance : 0,
+        balance : getBalance() || 0 ,
         type : "",
         isModalActive : false,
         isEditModalActive : false,
