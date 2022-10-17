@@ -70,7 +70,7 @@ const closeHandler = () => {
         }
         &--content{
             width: 50%;
-            height: 50%;
+            height: 45%;
             background-color: #121212;
             position: absolute;
             top: 50%;

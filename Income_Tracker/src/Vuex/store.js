@@ -30,20 +30,20 @@ const store = createStore({
             state.balance = totalIncome - totalExpense;
         },
         deleteValueList(state,payload){
-            const selected = state.valueList.filter((item) => item.id === payload);
-            if(selected[0].type == 'Income'){
-                state.balance = state.balance - selected[0].amount}
+            const selected = state.valueList.find((item) => item.id === payload);
+            if(selected.type == 'Income'){
+                state.balance = state.balance - selected.amount}
             else{
-                state.balance = state.balance + selected[0].amount}
+                state.balance = state.balance + selected.amount}
             state.valueList =  state.valueList.filter((item) => item.id !== payload)
         },
         editValueList(state,payload){
-            const selected = state.valueList.filter((item) => item.id === payload.id);
-            if(selected[0].type == 'Income'){
-                state.balance = state.balance - selected[0].amount + payload.amount
+            const selected = state.valueList.find((item) => item.id === payload.id);
+            if(selected.type == 'Income'){
+                state.balance = state.balance - selected.amount + payload.amount
             }
             else{
-                state.balance = state.balance + selected[0].amount - payload.amount
+                state.balance = state.balance + selected.amount - payload.amount
             }
             state.valueList =  state.valueList.filter((item) => item.id !== payload.id)
             state.valueList = [...state.valueList , payload]
